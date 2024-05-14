@@ -1,0 +1,5 @@
+package-as: CVarExplorer
+
+ignore:
+  - babelfish_config.lua
+  - README.md
