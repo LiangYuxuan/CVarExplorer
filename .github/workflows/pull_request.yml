@@ -1,0 +1,33 @@
+name: Test pull request
+
+on:
+  pull_request:
+  merge_group:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install and Run Luacheck
+        uses: nebularg/actions-luacheck@v1
+        with:
+          args: "--no-color -q"
+          annotate: warning
+
+      - name: Find globals
+        uses: LiangYuxuan/action-findglobals@master
+        with:
+          find-args: "! -path \"./Libs/*\""
+
+      - name: Create Retail Package
+        uses: BigWigsMods/packager@master
+        with:
+          args: "-d -z"
+
+      - uses: actions/upload-artifact@master
+        with:
+          name: pull-request-${{ github.event.number }}-${{ github.sha }}
+          path: .release/
