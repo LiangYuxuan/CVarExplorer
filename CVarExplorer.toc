@@ -3,7 +3,7 @@
 ## Notes: Explore, search, change, save, restore and compare CVars.
 ## Author: @project-author@
 ## Version: @project-version@
-## SavedVariablesPerCharacter: CVarExplorerDB
+## SavedVariables: CVarExplorerDB
 ## IconTexture: 237162
 ## X-License: MIT
 
