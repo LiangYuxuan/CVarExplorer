@@ -55,8 +55,10 @@ local specialCVar = {
     ['cameraSavedPitch'] = 'UserActionFrequently',
     ['clubFinderPlayerSettings'] = 'UserActionFrequently',
     ['lastCharacterIndex'] = 'UserActionFrequently',
+    ['lastSelectedClubId'] = 'UserActionFrequently',
 
     -- Track Bitwise: CVars that used to track with bitwise operation
+    ['maxLevelSpecsUsed'] = 'TrackBitwise',
     ['trackedAchievements'] = 'TrackBitwise',
     ['trackedPerksActivities'] = 'TrackBitwise',
     ['trackedProfessionRecipes'] = 'TrackBitwise',
