@@ -87,11 +87,39 @@ local specialCVar = {
 
 ---@class CECVarWindowLine: Frame
 ---@field IsCreated boolean
----@field Name FontString
----@field Scope FontString
----@field DefaultValue FontString
----@field Profile FontString
----@field Value FontString
+---@field Fields FontString[]
+
+local columnInfo = {
+    {
+        title = L['Name'],
+        width = 300,
+        attribute = 'name',
+    },
+    {
+        title = L['Scope'],
+        width = 100,
+        attribute = 'scope',
+    },
+    {
+        title = L['Default Value'],
+        width = 150,
+        attribute = 'defaultValue',
+    },
+    {
+        title = L['Profile'],
+        width = 150,
+        attribute = 'profile',
+    },
+    {
+        title = L['Value'],
+        width = 150,
+        attribute = 'value',
+    },
+    {
+        title = L['Actions'],
+        width = 200,
+    },
+}
 
 ---@param frame CECVarWindowLine
 ---@param data CECVarWindowData
@@ -102,39 +130,28 @@ local function Initializer(frame, data)
         frame:SetBackdrop(backdropInfo)
         frame:SetBackdropColor(0, 0, 0, 0.5)
 
-        frame.Name = frame:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
-        frame.Name:SetPoint('LEFT', 1, 0)
-        frame.Name:SetSize(200, 20)
-        frame.Name:SetJustifyH('LEFT')
+        local offset = 0
+        frame.Fields = {}
+        for i, info in ipairs(columnInfo) do
+            if info.attribute then
+                local field = frame:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
+                field:SetPoint('LEFT', offset + 10, 0)
+                field:SetSize(info.width - 20, 20)
+                field:SetJustifyH('LEFT')
 
-        frame.Scope = frame:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
-        frame.Scope:SetPoint('LEFT', 201, 0)
-        frame.Scope:SetSize(100, 20)
-        frame.Scope:SetJustifyH('LEFT')
-
-        frame.DefaultValue = frame:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
-        frame.DefaultValue:SetPoint('LEFT', 301, 0)
-        frame.DefaultValue:SetSize(150, 20)
-        frame.DefaultValue:SetJustifyH('LEFT')
-
-        frame.Profile = frame:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
-        frame.Profile:SetPoint('LEFT', 451, 0)
-        frame.Profile:SetSize(150, 20)
-        frame.Profile:SetJustifyH('LEFT')
-
-        frame.Value = frame:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
-        frame.Value:SetPoint('LEFT', 601, 0)
-        frame.Value:SetSize(150, 20)
-        frame.Value:SetJustifyH('LEFT')
+                offset = offset + info.width
+                frame.Fields[i] = field
+            end
+        end
 
         frame.IsCreated = true
     end
 
-    frame.Name:SetText(data.name)
-    frame.Scope:SetText(data.scope)
-    frame.DefaultValue:SetText(data.defaultValue)
-    frame.Profile:SetText(data.profile)
-    frame.Value:SetText(data.value)
+    for i, info in ipairs(columnInfo) do
+        if info.attribute then
+            frame.Fields[i]:SetText(data[info.attribute])
+        end
+    end
 end
 
 ---@param a CECVarWindowData
@@ -144,18 +161,30 @@ local function Compare(a, b)
 end
 
 function Core:CreateWindow()
+    local scrollBoxHeight = 400
+    local scrollBoxWidth = 0
+    for _, info in ipairs(columnInfo) do
+        scrollBoxWidth = scrollBoxWidth + info.width
+    end
+
     ---@class CVarExplorerWindow: Frame
     local window = CreateFrame('Frame', 'CVarExplorerWindow', UIParent, 'PortraitFrameTemplate')
     window:ClearAllPoints()
     window:SetPoint('CENTER')
-    window:SetSize(780, 500)
+    window:SetSize(scrollBoxWidth + 30, scrollBoxHeight + 100)
 
     window.TitleContainer.TitleText:SetText('CVar Explorer')
     window.PortraitContainer.portrait:SetTexture(237162)
 
+    local columnDisplay = CreateFrame('Frame', nil, window, 'ColumnDisplayTemplate')
+    columnDisplay:ClearAllPoints()
+    columnDisplay:SetPoint('TOPLEFT', 15, -30)
+    columnDisplay:SetPoint('TOPRIGHT', -15, -30)
+    columnDisplay:LayoutColumns(columnInfo)
+
     local scrollBox = CreateFrame('Frame', nil, window, 'WowScrollBoxList')
-    scrollBox:SetPoint('BOTTOM', 0, 10)
-    scrollBox:SetSize(750, 400)
+    scrollBox:SetPoint('TOPLEFT', columnDisplay, 'BOTTOMLEFT')
+    scrollBox:SetSize(scrollBoxWidth, scrollBoxHeight)
 
     local scrollBar = CreateFrame('EventFrame', nil, window, 'MinimalScrollBar')
     scrollBar:SetPoint('TOPLEFT', scrollBox, 'TOPRIGHT')
@@ -167,36 +196,6 @@ function Core:CreateWindow()
     scrollView:SetDataProvider(self.dataProvider)
 
     ScrollUtil.InitScrollBoxListWithScrollBar(scrollBox, scrollBar, scrollView)
-
-    window.Name = window:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
-    window.Name:SetPoint('TOPLEFT', scrollBox, 1, 20)
-    window.Name:SetSize(200, 20)
-    window.Name:SetJustifyH('LEFT')
-    window.Name:SetText(L['Name'])
-
-    window.Scope = window:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
-    window.Scope:SetPoint('TOPLEFT', scrollBox, 201, 20)
-    window.Scope:SetSize(100, 20)
-    window.Scope:SetJustifyH('LEFT')
-    window.Scope:SetText(L['Scope'])
-
-    window.DefaultValue = window:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
-    window.DefaultValue:SetPoint('TOPLEFT', scrollBox, 301, 20)
-    window.DefaultValue:SetSize(150, 20)
-    window.DefaultValue:SetJustifyH('LEFT')
-    window.DefaultValue:SetText(L['Default Value'])
-
-    window.Profile = window:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
-    window.Profile:SetPoint('TOPLEFT', scrollBox, 451, 20)
-    window.Profile:SetSize(150, 20)
-    window.Profile:SetJustifyH('LEFT')
-    window.Profile:SetText(L['Profile'])
-
-    window.Value = window:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
-    window.Value:SetPoint('TOPLEFT', scrollBox, 601, 20)
-    window.Value:SetSize(150, 20)
-    window.Value:SetJustifyH('LEFT')
-    window.Value:SetText(L['Value'])
 end
 
 function Core:RefreshCVars()
