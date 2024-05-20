@@ -41,6 +41,7 @@ local specialCVar = {
     ["lastRenownForMajorFaction2593"] = 'GameProgress',
 
     -- Game Tip: CVars that used to show game tips
+    ['closedExtraAbiltyTutorials'] = 'GameTip',
     ['closedInfoFrames'] = 'GameTip',
     ['closedInfoFramesAccountWide'] = 'GameTip',
     ['engineSurveyPatch'] = 'GameTip',
@@ -56,6 +57,7 @@ local specialCVar = {
     ['clubFinderPlayerSettings'] = 'UserActionFrequently',
     ['lastCharacterIndex'] = 'UserActionFrequently',
     ['lastSelectedClubId'] = 'UserActionFrequently',
+    ['petJournalTab'] = 'UserActionFrequently',
 
     -- Track Bitwise: CVars that used to track with bitwise operation
     ['maxLevelSpecsUsed'] = 'TrackBitwise',
