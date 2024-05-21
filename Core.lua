@@ -214,7 +214,7 @@ function Core:RefreshCVars()
     self.dataProvider:Flush()
 
     -- debug
-    wipe(CVarExplorerDB.DebugList)
+    wipe(self.debugList)
 
     local commands = ConsoleGetAllCommands()
     for _, info in ipairs(commands) do
@@ -226,7 +226,22 @@ function Core:RefreshCVars()
         ) then
             local name = info.command
             local value, defaultValue, isStoredServerAccount, isStoredServerCharacter, isLockedFromUser, _, isReadOnly = C_CVar.GetCVarInfo(name)
-            local profileValue = isStoredServerCharacter and CVarExplorerDB.Profile[self.playerFullName][name] or CVarExplorerDB.Profile.Account[name]
+
+            if isStoredServerCharacter then
+                -- Character CVar
+                if not self.profileCharacter[name] and defaultValue then
+                    -- New discovered character or new CVar
+                    self.profileCharacter[name] = defaultValue
+                end
+            else
+                -- Account CVar
+                if not self.profileAccount[name] and defaultValue then
+                    -- New CVar
+                    self.profileAccount[name] = defaultValue
+                end
+            end
+
+            local profileValue = isStoredServerCharacter and self.profileCharacter[name] or self.profileAccount[name]
             if (
                 (showLockedFromUser or not isLockedFromUser)
                 and (showReadOnly or not isReadOnly)
@@ -243,22 +258,29 @@ function Core:RefreshCVars()
                 self.dataProvider:Insert(data)
 
                 -- debug
-                tinsert(CVarExplorerDB.DebugList, data)
+                tinsert(self.debugList, data)
             end
         end
     end
 end
 
 function Core:Initialize()
-    self.playerFullName = UnitName('player') .. '-' .. GetRealmName()
+    local playerFullName = UnitName('player') .. '-' .. GetRealmName()
 
     CVarExplorerDB = CVarExplorerDB or {}
     CVarExplorerDB.Profile = CVarExplorerDB.Profile or {}
     CVarExplorerDB.Profile.Account = CVarExplorerDB.Profile.Account or {}
-    CVarExplorerDB.Profile[self.playerFullName] = CVarExplorerDB.Profile[self.playerFullName] or {}
+    -- CVarExplorerDB.Profile[playerFullName] = CVarExplorerDB.Profile[playerFullName] or {}
+    CVarExplorerDB.Profile.Character = CVarExplorerDB.Profile.Character or {}
+
+    self.profileAccount = CVarExplorerDB.Profile.Account
+    -- self.profileCharacter = CVarExplorerDB.Profile[playerFullName]
+    self.profileCharacter = CVarExplorerDB.Profile.Character
 
     -- debug
     CVarExplorerDB.DebugList = CVarExplorerDB.DebugList or {}
+    CVarExplorerDB.DebugList[playerFullName] = CVarExplorerDB.DebugList[playerFullName] or {}
+    self.debugList = CVarExplorerDB.DebugList[playerFullName]
 
     self.dataProvider = CreateDataProvider()
     self.dataProvider:SetSortComparator(Compare, true)
