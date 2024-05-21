@@ -47,8 +47,13 @@ local specialCVar = {
     ['engineSurveyPatch'] = 'GameTip',
     ['gameTip'] = 'GameTip',
     ['lastAddonVersion'] = 'GameTip',
+    ['lastGarrisonMissionTutorial'] = 'GameTip',
     ['latestSplashScreen'] = 'GameTip',
+    ['orderHallMissionTutorial'] = 'GameTip',
     ['seenTimerunningFirstLoginPopup'] = 'GameTip',
+    ['shipyardMissionTutorialAreaBuff'] = 'GameTip',
+    ['shipyardMissionTutorialBlockade'] = 'GameTip',
+    ['shipyardMissionTutorialFirst'] = 'GameTip',
 
     -- User Action Frequently: CVars that frequently changed by user actions
     ['advJournalLastOpened'] = 'UserActionFrequently',
