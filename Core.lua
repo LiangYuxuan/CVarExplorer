@@ -93,9 +93,22 @@ local specialCVar = {
 ---@field value string
 
 ---@class CECVarWindowLine: Frame
----@field IsCreated boolean
----@field Fields FontString[]
+---@field isCreated boolean
+---@field fields FontString[]
+---@field buttons Button[]
+---@field data CECVarWindowData
 
+---@class CECVarWindowButtonInfo
+---@field text string
+---@field onClick fun(button: CECVarWindowLine)
+
+---@class CECVarWindowColumnInfo
+---@field title string
+---@field width number
+---@field attribute string?
+---@field buttons CECVarWindowButtonInfo[]?
+
+---@type CECVarWindowColumnInfo[]
 local columnInfo = {
     {
         title = L['Name'],
@@ -109,36 +122,79 @@ local columnInfo = {
     },
     {
         title = L['Default Value'],
-        width = 150,
+        width = 100,
         attribute = 'defaultValue',
     },
     {
         title = L['Profile'],
-        width = 150,
+        width = 100,
         attribute = 'profile',
     },
     {
         title = L['Value'],
-        width = 150,
+        width = 100,
         attribute = 'value',
     },
     {
         title = L['Actions'],
-        width = 200,
+        width = 450,
+        buttons = {
+            {
+                text = L['Load Profile'],
+                onClick = function(button)
+                    local data = button:GetParent().data
+                    C_CVar.SetCVar(data.name, data.profile)
+                    Core:RefreshCVars()
+                end,
+            },
+            {
+                text = L['Load Default'],
+                onClick = function(button)
+                    local data = button:GetParent().data
+                    C_CVar.SetCVar(data.name, data.defaultValue)
+                    Core:RefreshCVars()
+                end,
+            },
+            {
+                text = L['Save Value'],
+                onClick = function(button)
+                    local data = button:GetParent().data
+                    if data.scope == 'Character' then
+                        Core.profileCharacter[data.name] = data.value
+                    else
+                        Core.profileAccount[data.name] = data.value
+                    end
+                    Core:RefreshCVars()
+                end,
+            },
+            {
+                text = L['Save Default'],
+                onClick = function(button)
+                    local data = button:GetParent().data
+                    if data.scope == 'Character' then
+                        Core.profileCharacter[data.name] = data.defaultValue
+                    else
+                        Core.profileAccount[data.name] = data.defaultValue
+                    end
+                    Core:RefreshCVars()
+                end,
+            },
+        },
     },
 }
 
 ---@param frame CECVarWindowLine
 ---@param data CECVarWindowData
 local function Initializer(frame, data)
-    if not frame.IsCreated then
+    if not frame.isCreated then
         Mixin(frame, BackdropTemplateMixin)
-        frame:SetSize(750, 20)
+        frame:SetSize(Core.scrollBoxWidth, 20)
         frame:SetBackdrop(backdropInfo)
         frame:SetBackdropColor(0, 0, 0, 0.5)
 
         local offset = 0
-        frame.Fields = {}
+
+        frame.fields = {}
         for i, info in ipairs(columnInfo) do
             if info.attribute then
                 local field = frame:CreateFontString(nil, 'ARTWORK', 'GameFontNormal')
@@ -147,16 +203,36 @@ local function Initializer(frame, data)
                 field:SetJustifyH('LEFT')
 
                 offset = offset + info.width
-                frame.Fields[i] = field
+                frame.fields[i] = field
             end
         end
 
-        frame.IsCreated = true
+        offset = offset + 10
+
+        frame.buttons = {}
+        for _, info in ipairs(columnInfo) do
+            if info.buttons then
+                for _, buttonInfo in ipairs(info.buttons) do
+                    local button = CreateFrame('Button', nil, frame, 'UIPanelButtonTemplate')
+                    button:SetText(buttonInfo.text)
+                    button:SetPoint('LEFT', offset, 0)
+                    button:SetSize(95, 20)
+                    button:SetScript('OnClick', buttonInfo.onClick)
+
+                    offset = offset + 100
+
+                    tinsert(frame.buttons, button)
+                end
+            end
+        end
+
+        frame.isCreated = true
     end
 
+    frame.data = data
     for i, info in ipairs(columnInfo) do
         if info.attribute then
-            frame.Fields[i]:SetText(data[info.attribute])
+            frame.fields[i]:SetText(data[info.attribute])
         end
     end
 end
@@ -168,14 +244,16 @@ local function Compare(a, b)
 end
 
 function Core:CreateWindow()
-    local scrollBoxHeight = 400
+    local scrollBoxHeight = 500
     local scrollBoxWidth = 0
     for _, info in ipairs(columnInfo) do
         scrollBoxWidth = scrollBoxWidth + info.width
     end
+    self.scrollBoxWidth = scrollBoxWidth
 
     ---@class CVarExplorerWindow: Frame
     local window = CreateFrame('Frame', 'CVarExplorerWindow', UIParent, 'PortraitFrameTemplate')
+    window:SetFrameStrata('HIGH')
     window:ClearAllPoints()
     window:SetPoint('CENTER')
     window:SetSize(scrollBoxWidth + 30, scrollBoxHeight + 100)
