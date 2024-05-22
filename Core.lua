@@ -183,11 +183,7 @@ local columnInfo = {
                 text = L['Save Value'],
                 onClick = function(button)
                     local data = button:GetParent().data
-                    if data.scope == 'Character' then
-                        Core.profileCharacter[data.name] = data.value
-                    else
-                        Core.profileAccount[data.name] = data.value
-                    end
+                    Core.profile[data.name] = data.value
                     Core:RefreshCVars()
                 end,
             },
@@ -195,11 +191,7 @@ local columnInfo = {
                 text = L['Save Default'],
                 onClick = function(button)
                     local data = button:GetParent().data
-                    if data.scope == 'Character' then
-                        Core.profileCharacter[data.name] = data.defaultValue
-                    else
-                        Core.profileAccount[data.name] = data.defaultValue
-                    end
+                    Core.profile[data.name] = data.defaultValue
                     Core:RefreshCVars()
                 end,
             },
@@ -310,8 +302,10 @@ end
 function Core:RefreshCVars()
     local showLockedFromUser = false
     local showReadOnly = false
-    local hideSnapshotNotChanged = true
+    local hideProfileEqual = true
     local hideSpecialCVars = true
+
+    local enableNumberEquals = true
 
     self.dataProvider:Flush()
 
@@ -329,25 +323,16 @@ function Core:RefreshCVars()
             local name = info.command
             local value, defaultValue, isStoredServerAccount, isStoredServerCharacter, isLockedFromUser, _, isReadOnly = C_CVar.GetCVarInfo(name)
 
-            if isStoredServerCharacter then
-                -- Character CVar
-                if not self.profileCharacter[name] and defaultValue then
-                    -- New discovered character or new CVar
-                    self.profileCharacter[name] = defaultValue
-                end
-            else
-                -- Account CVar
-                if not self.profileAccount[name] and defaultValue then
-                    -- New CVar
-                    self.profileAccount[name] = defaultValue
-                end
+            if not self.profile[name] and defaultValue then
+                self.profile[name] = defaultValue
             end
+            local profileValue = self.profile[name]
+            local profileEqual = enableNumberEquals and (tonumber(value) and tonumber(value) == tonumber(profileValue)) or value == profileValue
 
-            local profileValue = isStoredServerCharacter and self.profileCharacter[name] or self.profileAccount[name]
             if (
                 (showLockedFromUser or not isLockedFromUser)
                 and (showReadOnly or not isReadOnly)
-                and (not hideSnapshotNotChanged or value ~= profileValue)
+                and (not hideProfileEqual or not profileEqual)
                 and (not hideSpecialCVars or not specialCVar[name])
             ) then
                 local data = {
@@ -367,19 +352,13 @@ function Core:RefreshCVars()
 end
 
 function Core:Initialize()
-    local playerFullName = UnitName('player') .. '-' .. GetRealmName()
-
     CVarExplorerDB = CVarExplorerDB or {}
-    CVarExplorerDB.Profile = CVarExplorerDB.Profile or {}
-    CVarExplorerDB.Profile.Account = CVarExplorerDB.Profile.Account or {}
-    -- CVarExplorerDB.Profile[playerFullName] = CVarExplorerDB.Profile[playerFullName] or {}
-    CVarExplorerDB.Profile.Character = CVarExplorerDB.Profile.Character or {}
-
-    self.profileAccount = CVarExplorerDB.Profile.Account
-    -- self.profileCharacter = CVarExplorerDB.Profile[playerFullName]
-    self.profileCharacter = CVarExplorerDB.Profile.Character
+    CVarExplorerDB.Profiles = CVarExplorerDB.Profiles or {}
+    CVarExplorerDB.Profiles.Default = CVarExplorerDB.Profiles.Default or {}
+    self.profile = CVarExplorerDB.Profiles.Default
 
     -- debug
+    local playerFullName = UnitName('player') .. '-' .. GetRealmName()
     CVarExplorerDB.DebugList = CVarExplorerDB.DebugList or {}
     CVarExplorerDB.DebugList[playerFullName] = CVarExplorerDB.DebugList[playerFullName] or {}
     self.debugList = CVarExplorerDB.DebugList[playerFullName]
