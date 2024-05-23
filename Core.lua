@@ -287,6 +287,7 @@ function Core:CreateWindow()
     window:ClearAllPoints()
     window:SetPoint('CENTER')
     window:SetSize(scrollBoxWidth + 30, 600)
+    window:Hide()
     Core.window = window
 
     window.TitleContainer.TitleText:SetText('CVar Explorer')
@@ -393,6 +394,10 @@ function Core:Initialize()
 
     self:CreateWindow()
     self:RefreshCVars()
+
+    if (not self.dataProvider:IsEmpty()) then
+        self.window:Show()
+    end
 
     SLASH_CVAREXPLORER1, SLASH_CVAREXPLORER2 = '/ce', '/cvarexplorer'
     _G.SlashCmdList.CVAREXPLORER = function()
