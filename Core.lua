@@ -383,4 +383,9 @@ function Core:Initialize()
 
     self:CreateWindow()
     self:RefreshCVars()
+
+    SLASH_CVAREXPLORER1, SLASH_CVAREXPLORER2 = '/ce', '/cvarexplorer'
+    _G.SlashCmdList.CVAREXPLORER = function()
+        Core.window:SetShown(not Core.window:IsShown())
+    end
 end
