@@ -275,7 +275,6 @@ local function Compare(a, b)
 end
 
 function Core:CreateWindow()
-    local scrollBoxHeight = 500
     local scrollBoxWidth = 0
     for _, info in ipairs(columnInfo) do
         scrollBoxWidth = scrollBoxWidth + info.width
@@ -287,20 +286,31 @@ function Core:CreateWindow()
     window:SetFrameStrata('HIGH')
     window:ClearAllPoints()
     window:SetPoint('CENTER')
-    window:SetSize(scrollBoxWidth + 30, scrollBoxHeight + 100)
+    window:SetSize(scrollBoxWidth + 30, 600)
+    Core.window = window
 
     window.TitleContainer.TitleText:SetText('CVar Explorer')
     window.PortraitContainer.portrait:SetTexture(237162)
 
+    local refreshButton = CreateFrame('Button', nil, window, 'UIPanelButtonTemplate')
+    refreshButton:ClearAllPoints()
+    refreshButton:SetPoint('TOPRIGHT', -30, -30)
+    refreshButton:SetSize(100, 20)
+    refreshButton:SetText(L['Refresh'])
+    refreshButton:SetScript('OnClick', function()
+        Core:RefreshCVars()
+    end)
+
     local columnDisplay = CreateFrame('Frame', nil, window, 'ColumnDisplayTemplate')
     columnDisplay:ClearAllPoints()
-    columnDisplay:SetPoint('TOPLEFT', 15, -30)
-    columnDisplay:SetPoint('TOPRIGHT', -15, -30)
+    columnDisplay:SetPoint('TOPLEFT', 15, -20)
+    columnDisplay:SetPoint('TOPRIGHT', -15, -20)
+    columnDisplay:SetFrameLevel(window:GetFrameLevel())
     columnDisplay:LayoutColumns(columnInfo)
 
     local scrollBox = CreateFrame('Frame', nil, window, 'WowScrollBoxList')
     scrollBox:SetPoint('TOPLEFT', columnDisplay, 'BOTTOMLEFT')
-    scrollBox:SetSize(scrollBoxWidth, scrollBoxHeight)
+    scrollBox:SetPoint('BOTTOMRIGHT', window, 'BOTTOMRIGHT', -15, 10)
 
     local scrollBar = CreateFrame('EventFrame', nil, window, 'MinimalScrollBar')
     scrollBar:SetPoint('TOPLEFT', scrollBox, 'TOPRIGHT')
