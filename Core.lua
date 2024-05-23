@@ -16,10 +16,10 @@ Core:SetScript('OnEvent', function(self, event)
 end)
 
 local backdropInfo = {
-	bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
-	tile = true,
-	tileSize = 32,
-	insets = { left = 2, right = 2, top = 2, bottom = 2 },
+    bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
+    tile = true,
+    tileSize = 32,
+    insets = { left = 2, right = 2, top = 2, bottom = 2 },
 }
 
 local specialCVar = {
