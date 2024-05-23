@@ -61,7 +61,7 @@ local specialCVar = {
     ['showTutorials'] = 'GameTip',
 
     -- Time Event: CVars that used to track notified time events
-    ['lastAddonVersion'] = 'GameTip',
+    ['lastAddonVersion'] = 'TimeEvent',
     ['latestSplashScreen'] = 'TimeEvent',
     ['newMythicPlusSeason'] = 'TimeEvent',
     ['newPvpSeason'] = 'TimeEvent',
