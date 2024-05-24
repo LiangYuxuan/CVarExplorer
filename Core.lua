@@ -1,6 +1,29 @@
 local addon, Engine = ...
 local L = Engine.L
 
+-- Lua functions
+local _G = _G
+local ipairs, tinsert, strfind, strlower, tonumber = ipairs, tinsert, strfind, strlower, tonumber
+
+-- WoW API / Variables
+local C_CVar_GetCVarInfo = C_CVar.GetCVarInfo
+local C_CVar_SetCVar = C_CVar.SetCVar
+local C_Timer_After = C_Timer.After
+local ConsoleGetAllCommands = ConsoleGetAllCommands
+local CreateFrame = CreateFrame
+
+local BackdropTemplateMixin = BackdropTemplateMixin
+local CreateDataProvider = CreateDataProvider
+local CreateScrollBoxListLinearView = CreateScrollBoxListLinearView
+local Mixin = Mixin
+local ScrollUtil_InitScrollBoxListWithScrollBar = ScrollUtil.InitScrollBoxListWithScrollBar
+
+local Enum_ConsoleCategory_Debug = Enum.ConsoleCategory.Debug
+local Enum_ConsoleCategory_Gm = Enum.ConsoleCategory.Gm
+local Enum_ConsoleCommandType_Cvar = Enum.ConsoleCommandType.Cvar
+
+-- GLOBALS: CVarExplorerDB
+
 ---@class CECore: Frame
 local Core = CreateFrame('Frame')
 Engine.Core = Core
@@ -183,7 +206,7 @@ local columnInfo = {
                 text = L['Load Profile'],
                 onClick = function(button)
                     local data = button:GetParent().data
-                    C_CVar.SetCVar(data.name, data.profile)
+                    C_CVar_SetCVar(data.name, data.profile)
                     Core:RefreshCVars()
                 end,
             },
@@ -191,7 +214,7 @@ local columnInfo = {
                 text = L['Load Default'],
                 onClick = function(button)
                     local data = button:GetParent().data
-                    C_CVar.SetCVar(data.name, data.defaultValue)
+                    C_CVar_SetCVar(data.name, data.defaultValue)
                     Core:RefreshCVars()
                 end,
             },
@@ -283,7 +306,7 @@ function Core:CreateWindow()
     self.scrollBoxWidth = scrollBoxWidth
 
     ---@class CVarExplorerWindow: Frame
-    local window = CreateFrame('Frame', 'CVarExplorerWindow', UIParent, 'PortraitFrameTemplate')
+    local window = CreateFrame('Frame', 'CVarExplorerWindow', _G.UIParent, 'PortraitFrameTemplate')
     window:SetFrameStrata('HIGH')
     window:ClearAllPoints()
     window:SetPoint('CENTER')
@@ -323,7 +346,7 @@ function Core:CreateWindow()
     scrollView:SetElementInitializer('Frame', Initializer)
     scrollView:SetDataProvider(self.dataProvider)
 
-    ScrollUtil.InitScrollBoxListWithScrollBar(scrollBox, scrollBar, scrollView)
+    ScrollUtil_InitScrollBoxListWithScrollBar(scrollBox, scrollBar, scrollView)
 end
 
 function Core:RefreshCVars()
@@ -339,13 +362,13 @@ function Core:RefreshCVars()
     local commands = ConsoleGetAllCommands()
     for _, info in ipairs(commands) do
         if (
-            info.commandType == Enum.ConsoleCommandType.Cvar
-            and info.category ~= Enum.ConsoleCategory.Debug
-            and info.category ~= Enum.ConsoleCategory.Gm
+            info.commandType == Enum_ConsoleCommandType_Cvar
+            and info.category ~= Enum_ConsoleCategory_Debug
+            and info.category ~= Enum_ConsoleCategory_Gm
             and not strfind(strlower(info.command), 'debug')
         ) then
             local name = info.command
-            local value, defaultValue, isStoredServerAccount, isStoredServerCharacter, isLockedFromUser, _, isReadOnly = C_CVar.GetCVarInfo(name)
+            local value, defaultValue, isStoredServerAccount, isStoredServerCharacter, isLockedFromUser, _, isReadOnly = C_CVar_GetCVarInfo(name)
 
             if not self.profile[name] and defaultValue then
                 self.profile[name] = defaultValue
@@ -382,13 +405,14 @@ function Core:Initialize()
     self.dataProvider:SetSortComparator(Compare, true)
     self:CreateWindow()
 
-    SLASH_CVAREXPLORER1, SLASH_CVAREXPLORER2 = '/ce', '/cvarexplorer'
+    ---@diagnostic disable-next-line: inject-field
+    _G.SLASH_CVAREXPLORER1, _G.SLASH_CVAREXPLORER2 = '/ce', '/cvarexplorer'
     _G.SlashCmdList.CVAREXPLORER = function()
         self:RefreshCVars()
         self.window:SetShown(not self.window:IsShown())
     end
 
-    C_Timer.After(3, function()
+    C_Timer_After(3, function()
         self:RefreshCVars()
         if (not self.dataProvider:IsEmpty()) then
             self.window:Show()
