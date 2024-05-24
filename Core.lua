@@ -336,9 +336,6 @@ function Core:RefreshCVars()
 
     self.dataProvider:Flush()
 
-    -- debug
-    wipe(self.debugList)
-
     local commands = ConsoleGetAllCommands()
     for _, info in ipairs(commands) do
         if (
@@ -370,9 +367,6 @@ function Core:RefreshCVars()
                     value = value,
                 }
                 self.dataProvider:Insert(data)
-
-                -- debug
-                tinsert(self.debugList, data)
             end
         end
     end
@@ -383,12 +377,6 @@ function Core:Initialize()
     CVarExplorerDB.Profiles = CVarExplorerDB.Profiles or {}
     CVarExplorerDB.Profiles.Default = CVarExplorerDB.Profiles.Default or {}
     self.profile = CVarExplorerDB.Profiles.Default
-
-    -- debug
-    local playerFullName = UnitName('player') .. '-' .. GetRealmName()
-    CVarExplorerDB.DebugList = CVarExplorerDB.DebugList or {}
-    CVarExplorerDB.DebugList[playerFullName] = CVarExplorerDB.DebugList[playerFullName] or {}
-    self.debugList = CVarExplorerDB.DebugList[playerFullName]
 
     self.dataProvider = CreateDataProvider()
     self.dataProvider:SetSortComparator(Compare, true)
