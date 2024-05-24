@@ -1,5 +1,5 @@
 ## Interface: 100207
-## Title: CVar Explorer
+## Title: CVarExplorer
 ## Notes: Explore, search, change, save, restore and compare CVars.
 ## Author: @project-author@
 ## Version: @project-version@
