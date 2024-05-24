@@ -289,7 +289,7 @@ function Core:CreateWindow()
     window:SetPoint('CENTER')
     window:SetSize(scrollBoxWidth + 30, 600)
     window:Hide()
-    Core.window = window
+    self.window = window
 
     window.TitleContainer.TitleText:SetText('CVar Explorer')
     window.PortraitContainer.portrait:SetTexture(237162)
@@ -380,16 +380,18 @@ function Core:Initialize()
 
     self.dataProvider = CreateDataProvider()
     self.dataProvider:SetSortComparator(Compare, true)
-
     self:CreateWindow()
-    self:RefreshCVars()
-
-    if (not self.dataProvider:IsEmpty()) then
-        self.window:Show()
-    end
 
     SLASH_CVAREXPLORER1, SLASH_CVAREXPLORER2 = '/ce', '/cvarexplorer'
     _G.SlashCmdList.CVAREXPLORER = function()
-        Core.window:SetShown(not Core.window:IsShown())
+        self:RefreshCVars()
+        self.window:SetShown(not self.window:IsShown())
     end
+
+    C_Timer.After(3, function()
+        self:RefreshCVars()
+        if (not self.dataProvider:IsEmpty()) then
+            self.window:Show()
+        end
+    end)
 end
