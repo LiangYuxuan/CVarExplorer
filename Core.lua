@@ -85,6 +85,7 @@ local specialCVar = {
     ['lastTransmogOutfitIDSpec4'] = 'TrackAction',
     ['minimapShapeshiftTracking'] = 'TrackAction',
     ['minimapTrackedInfov3'] = 'TrackAction',
+    ['notifiedOfNewMail'] = 'TrackAction',
     ['petJournalTab'] = 'TrackAction',
     ['professionsOrderDurationDropdown'] = 'TrackAction',
     ['professionsOrderRecipientDropdown'] = 'TrackAction',
