@@ -22,5 +22,5 @@ ignore = {
 	-- "542", -- An empty if branch
 }
 globals = {
-    "CVarExplorerDB",
+	"CVarExplorerDB",
 }
