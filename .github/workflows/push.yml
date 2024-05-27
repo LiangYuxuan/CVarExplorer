@@ -27,10 +27,10 @@ jobs:
         with:
           find-args: "! -path \"./Libs/*\""
 
-      - name: Update CurseForge Translations
-        uses: LiangYuxuan/action-wowace-localization-import@master
-        env:
-          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+      # - name: Update CurseForge Translations
+      #   uses: LiangYuxuan/action-wowace-localization-import@master
+      #   env:
+      #     CF_API_KEY: ${{ secrets.CF_API_KEY }}
 
       - name: Create Retail Package
         uses: BigWigsMods/packager@master
