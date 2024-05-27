@@ -29,12 +29,16 @@ local Core = CreateFrame('Frame')
 Engine.Core = Core
 _G[addon] = Engine
 
-Core:RegisterEvent('PLAYER_LOGIN')
-Core:SetScript('OnEvent', function(self, event)
-    if (event == 'PLAYER_LOGIN') then
-        self:UnregisterEvent('PLAYER_LOGIN')
+Core:RegisterEvent('PLAYER_ENTERING_WORLD')
+Core:SetScript('OnEvent', function(self, event, ...)
+    if (event == 'PLAYER_ENTERING_WORLD') then
+        local isInitialLogin, isReloadingUi = ...
+        self:UnregisterEvent('PLAYER_ENTERING_WORLD')
         self:SetScript('OnEvent', nil)
-        self:Initialize()
+
+        if isInitialLogin or isReloadingUi then
+            self:Initialize()
+        end
     end
 end)
 
