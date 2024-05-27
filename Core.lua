@@ -146,6 +146,8 @@ local specialCVar = {
     ['CACHE-WQST-QuestV2RecordCount'] = 'Internal',
     ['engineSurvey'] = 'Internal',
     ['engineSurveyPatch'] = 'Internal',
+    ['modelLightShaftsColor'] = 'Internal',
+    ['modelLightShaftsSpread'] = 'Internal',
 }
 
 ---@class CECVarWindowData
