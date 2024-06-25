@@ -59,6 +59,7 @@ local specialCVar = {
     ['lastRenownForCovenant2'] = 'GameProgress',
     ['lastRenownForCovenant3'] = 'GameProgress',
     ['lastRenownForCovenant4'] = 'GameProgress',
+    ['lastRenownForDelvesSeason'] = 'GameProgress',
     ['lastRenownForMajorFaction2503'] = 'GameProgress',
     ['lastRenownForMajorFaction2507'] = 'GameProgress',
     ['lastRenownForMajorFaction2510'] = 'GameProgress',
@@ -79,12 +80,15 @@ local specialCVar = {
     ['lastGarrisonMissionTutorial'] = 'GameTip',
     ['lastVoidStorageTutorial'] = 'GameTip',
     ['orderHallMissionTutorial'] = 'GameTip',
+    ['professionAccessorySlotsExampleShown'] = 'GameTip',
+    ['professionToolSlotsExampleShown'] = 'GameTip',
     ['seenTimerunningFirstLoginPopup'] = 'GameTip',
     ['shipyardMissionTutorialAreaBuff'] = 'GameTip',
     ['shipyardMissionTutorialBlockade'] = 'GameTip',
     ['shipyardMissionTutorialFirst'] = 'GameTip',
     ['showNPETutorials'] = 'GameTip',
     ['showTokenFrame'] = 'GameTip',
+    ['showTokenFrameHonor'] = 'GameTip',
     ['showTutorials'] = 'GameTip',
 
     -- Time Event: CVars that used to track notified time events
@@ -92,6 +96,8 @@ local specialCVar = {
     ['latestSplashScreen'] = 'TimeEvent',
     ['newMythicPlusSeason'] = 'TimeEvent',
     ['newPvpSeason'] = 'TimeEvent',
+    ['splashScreenNormal'] = 'TimeEvent',
+    ['splashScreenSeason'] = 'TimeEvent',
 
     -- User Action Frequently: CVars that used to track user actions
     ['advJournalLastOpened'] = 'TrackAction',
@@ -104,6 +110,8 @@ local specialCVar = {
     ['EJLootSpec'] = 'TrackAction',
     ['EJRaidDifficulty'] = 'TrackAction',
     ['EJSelectedTier'] = 'TrackAction',
+    ['garrisonCompleteTalent'] = 'TrackAction',
+    ['garrisonCompleteTalentType'] = 'TrackAction',
     ['lastCharacterIndex'] = 'TrackAction',
     ['lastSelectedClubId'] = 'TrackAction',
     ['lastTransmogOutfitIDSpec1'] = 'TrackAction',
@@ -113,16 +121,23 @@ local specialCVar = {
     ['minimapShapeshiftTracking'] = 'TrackAction',
     ['minimapTrackedInfov3'] = 'TrackAction',
     ['notifiedOfNewMail'] = 'TrackAction',
+    ['numCurrencyCategories'] = 'TrackAction',
+    ['numReputationHeaders'] = 'TrackAction',
     ['petJournalTab'] = 'TrackAction',
     ['professionsOrderDurationDropdown'] = 'TrackAction',
     ['professionsOrderRecipientDropdown'] = 'TrackAction',
+    ['videoOptionsVersion'] = 'TrackAction',
 
     -- Track Bitwise: CVars that used to track user actions with bitwise operation
+    ['autoQuestPopUps'] = 'TrackActionBitwise',
+    ['collapsedCurrencyCategoryDefaults'] = 'TrackActionBitwise',
+    ['collapsedReputationHeaderDefaults'] = 'TrackActionBitwise',
     ['currencyCategoriesCollapsed'] = 'TrackActionBitwise',
     ['hardTrackedQuests'] = 'TrackActionBitwise',
     ['hardTrackedWorldQuests'] = 'TrackActionBitwise',
     ['maxLevelSpecsUsed'] = 'TrackActionBitwise',
     ['reputationsCollapsed'] = 'TrackActionBitwise',
+    ['seenAlliedRaceUnlocks'] = 'TrackActionBitwise',
     ['toyBoxCollectedFilters'] = 'TrackActionBitwise',
     ['toyBoxExpansionFilters'] = 'TrackActionBitwise',
     ['toyBoxSourceFilters'] = 'TrackActionBitwise',
@@ -140,6 +155,7 @@ local specialCVar = {
     ['wardrobeSourceFilters'] = 'TrackActionBitwise',
 
     -- Internal: Used by game internally
+    ['agentUID'] = 'Internal',
     ['CACHE-WGOB-GameObjectsHotfixCount'] = 'Internal',
     ['CACHE-WGOB-GameObjectsRecordCount'] = 'Internal',
     ['CACHE-WQST-QuestObjectiveHotfixCount'] = 'Internal',
@@ -150,6 +166,10 @@ local specialCVar = {
     ['CACHE-WQST-QuestV2RecordCount'] = 'Internal',
     ['engineSurvey'] = 'Internal',
     ['engineSurveyPatch'] = 'Internal',
+    ['telemetryWowlabsPackage'] = 'Internal',
+    ['telemetryWowPackage'] = 'Internal',
+
+    -- TODO: Removed in next patch
     ['modelLightShaftsColor'] = 'Internal',
     ['modelLightShaftsSpread'] = 'Internal',
 }
