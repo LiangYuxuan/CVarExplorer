@@ -86,10 +86,13 @@ local specialCVar = {
     ['shipyardMissionTutorialAreaBuff'] = 'GameTip',
     ['shipyardMissionTutorialBlockade'] = 'GameTip',
     ['shipyardMissionTutorialFirst'] = 'GameTip',
+    ['showCreateCharacterRealmConfirmDialog'] = 'GameTip',
     ['showNPETutorials'] = 'GameTip',
+    ['showPhotosensitivityWarning'] = 'GameTip',
     ['showTokenFrame'] = 'GameTip',
     ['showTokenFrameHonor'] = 'GameTip',
     ['showTutorials'] = 'GameTip',
+    ['talentPointsSpent'] = 'GameTip',
 
     -- Time Event: CVars that used to track notified time events
     ['lastAddonVersion'] = 'TimeEvent',
@@ -99,7 +102,7 @@ local specialCVar = {
     ['splashScreenNormal'] = 'TimeEvent',
     ['splashScreenSeason'] = 'TimeEvent',
 
-    -- User Action Frequently: CVars that used to track user actions
+    -- Track Action: CVars that used to track user actions
     ['advJournalLastOpened'] = 'TrackAction',
     ['auctionHouseDurationDropdown'] = 'TrackAction',
     ['cameraSavedDistance'] = 'TrackAction',
@@ -113,6 +116,7 @@ local specialCVar = {
     ['garrisonCompleteTalent'] = 'TrackAction',
     ['garrisonCompleteTalentType'] = 'TrackAction',
     ['lastCharacterIndex'] = 'TrackAction',
+    ['lastLockedDelvesCompanionAbilities'] = 'TrackAction',
     ['lastSelectedClubId'] = 'TrackAction',
     ['lastTransmogOutfitIDSpec1'] = 'TrackAction',
     ['lastTransmogOutfitIDSpec2'] = 'TrackAction',
@@ -128,7 +132,7 @@ local specialCVar = {
     ['professionsOrderRecipientDropdown'] = 'TrackAction',
     ['videoOptionsVersion'] = 'TrackAction',
 
-    -- Track Bitwise: CVars that used to track user actions with bitwise operation
+    -- Track Action Bitwise: CVars that used to track user actions with bitwise operation
     ['autoQuestPopUps'] = 'TrackActionBitwise',
     ['collapsedCurrencyCategoryDefaults'] = 'TrackActionBitwise',
     ['collapsedReputationHeaderDefaults'] = 'TrackActionBitwise',
@@ -356,7 +360,7 @@ function Core:CreateWindow()
     columnDisplay:ClearAllPoints()
     columnDisplay:SetPoint('TOPLEFT', 15, -20)
     columnDisplay:SetPoint('TOPRIGHT', -15, -20)
-    columnDisplay:SetFrameLevel(window:GetFrameLevel())
+    columnDisplay:SetFrameLevel(window:GetFrameLevel()) -- columnDisplay:SetUsingParentLevel(true)
     columnDisplay:LayoutColumns(columnInfo)
 
     local scrollBox = CreateFrame('Frame', nil, window, 'WowScrollBoxList')
