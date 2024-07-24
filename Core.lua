@@ -453,7 +453,7 @@ function Core:Initialize()
         self.window:SetShown(not self.window:IsShown())
     end
 
-    C_Timer_After(3, function()
+    C_Timer_After(10, function()
         self:RefreshCVars()
         if (not self.dataProvider:IsEmpty()) then
             self.window:Show()
