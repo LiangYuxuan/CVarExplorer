@@ -371,7 +371,7 @@ function Core:CreateWindow()
     columnDisplay:ClearAllPoints()
     columnDisplay:SetPoint('TOPLEFT', 15, -20)
     columnDisplay:SetPoint('TOPRIGHT', -15, -20)
-    columnDisplay:SetFrameLevel(window:GetFrameLevel()) -- columnDisplay:SetUsingParentLevel(true)
+    columnDisplay:SetUsingParentLevel(true)
     columnDisplay:LayoutColumns(columnInfo)
 
     local scrollBox = CreateFrame('Frame', nil, window, 'WowScrollBoxList')
