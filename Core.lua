@@ -76,9 +76,12 @@ local specialCVar = {
     ['perksActivitiesPendingCompletion'] = 'GameProgress',
 
     -- Game Tip: CVars that used to show game tips
+    ['addFriendInfoShown'] = 'GameTip',
     ['closedExtraAbiltyTutorials'] = 'GameTip',
     ['closedInfoFrames'] = 'GameTip',
     ['closedInfoFramesAccountWide'] = 'GameTip',
+    ['covenantMissionTutorial'] = 'GameTip',
+    ['dangerousShipyardMissionWarningAlreadyShown'] = 'GameTip',
     ['flaggedTutorials'] = 'GameTip',
     ['gameTip'] = 'GameTip',
     ['lastGarrisonMissionTutorial'] = 'GameTip',
@@ -104,6 +107,9 @@ local specialCVar = {
     ['showTokenFrame'] = 'GameTip',
     ['showTokenFrameHonor'] = 'GameTip',
     ['showTutorials'] = 'GameTip',
+    ['soulbindsActivatedTutorial'] = 'GameTip',
+    ['soulbindsLandingPageTutorial'] = 'GameTip',
+    ['soulbindsViewedTutorial'] = 'GameTip',
     ['talentPointsSpent'] = 'GameTip',
 
     -- Time Event: CVars that used to track notified time events
