@@ -136,6 +136,7 @@ local specialCVar = {
     ['lastCharacterIndex'] = 'TrackAction',
     ['lastLockedDelvesCompanionAbilities'] = 'TrackAction',
     ['lastSelectedClubId'] = 'TrackAction',
+    ['lastSelectedDelvesTier'] = 'TrackAction',
     ['lastTransmogOutfitIDSpec1'] = 'TrackAction',
     ['lastTransmogOutfitIDSpec2'] = 'TrackAction',
     ['lastTransmogOutfitIDSpec3'] = 'TrackAction',
