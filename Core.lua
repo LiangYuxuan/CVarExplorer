@@ -190,10 +190,6 @@ local specialCVar = {
     ['engineSurveyPatch'] = 'Internal',
     ['telemetryWowlabsPackage'] = 'Internal',
     ['telemetryWowPackage'] = 'Internal',
-
-    -- TODO: Removed in next patch
-    ['modelLightShaftsColor'] = 'Internal',
-    ['modelLightShaftsSpread'] = 'Internal',
 }
 
 ---@class CECVarWindowData
