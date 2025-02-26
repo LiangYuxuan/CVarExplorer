@@ -1,4 +1,4 @@
-## Interface: 110005, 110007
+## Interface: 110100
 ## Title: CVarExplorer
 ## Notes: Explore, search, change, save, restore and compare CVars.
 ## Author: @project-author@
