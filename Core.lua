@@ -71,6 +71,8 @@ local specialCVar = {
     ['lastRenownForMajorFaction2593'] = 'GameProgress',
     ['lastRenownForMajorFaction2594'] = 'GameProgress',
     ['lastRenownForMajorFaction2600'] = 'GameProgress',
+    ['lastRenownForMajorFaction2653'] = 'GameProgress',
+    ['lastRenownForMajorFaction2685'] = 'GameProgress',
     ['perksActivitiesCurrentMonth'] = 'GameProgress',
     ['perksActivitiesLastPoints'] = 'GameProgress',
     ['perksActivitiesPendingCompletion'] = 'GameProgress',
@@ -91,6 +93,8 @@ local specialCVar = {
     ['professionToolSlotsExampleShown'] = 'GameTip',
     ['seenAlliedRaceUnlocks'] = 'GameTip',
     ['seenAsiaCharacterUpgradePopup'] = 'GameTip',
+    ['seenCharacterSelectAddGroupHelpTip'] = 'GameTip',
+    ['seenCharacterSelectNavBarCampsHelpTip'] = 'GameTip',
     ['seenCharacterSelectWarbandHelpTip'] = 'GameTip',
     ['seenCharacterUpgradePopup'] = 'GameTip',
     ['seenConfigurationWarnings'] = 'GameTip',
@@ -113,8 +117,10 @@ local specialCVar = {
     ['talentPointsSpent'] = 'GameTip',
 
     -- Time Event: CVars that used to track notified time events
+    ['highestUnlockedDelvesTier'] = 'TimeEvent',
     ['lastAddonVersion'] = 'TimeEvent',
     ['latestSplashScreen'] = 'TimeEvent',
+    ['newDelvesSeason'] = 'TimeEvent',
     ['newMythicPlusSeason'] = 'TimeEvent',
     ['newPvpSeason'] = 'TimeEvent',
     ['splashScreenNormal'] = 'TimeEvent',
@@ -131,6 +137,7 @@ local specialCVar = {
     ['EJLootSpec'] = 'TrackAction',
     ['EJRaidDifficulty'] = 'TrackAction',
     ['EJSelectedTier'] = 'TrackAction',
+    ['eventSchedulerLastUpdate'] = 'TrackAction',
     ['garrisonCompleteTalent'] = 'TrackAction',
     ['garrisonCompleteTalentType'] = 'TrackAction',
     ['lastCharacterIndex'] = 'TrackAction',
@@ -190,6 +197,9 @@ local specialCVar = {
     ['engineSurveyPatch'] = 'Internal',
     ['telemetryWowlabsPackage'] = 'Internal',
     ['telemetryWowPackage'] = 'Internal',
+
+    -- User: Manual ignore
+    ['spellActivationOverlayOpacity'] = 'Manual',
 }
 
 ---@class CECVarWindowData
