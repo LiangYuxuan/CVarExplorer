@@ -7,7 +7,6 @@ local ipairs, tinsert, strfind, strlower, tonumber = ipairs, tinsert, strfind, s
 
 -- WoW API / Variables
 local C_CVar_GetCVarInfo = C_CVar.GetCVarInfo
-local C_CVar_SetCVar = C_CVar.SetCVar
 local C_Timer_After = C_Timer.After
 local ConsoleGetAllCommands = ConsoleGetAllCommands
 local CreateFrame = CreateFrame
@@ -261,7 +260,7 @@ local columnInfo = {
                 text = L['Load Profile'],
                 onClick = function(button)
                     local data = button:GetParent().data
-                    C_CVar_SetCVar(data.name, data.profile)
+                    _G.C_CVar.SetCVar(data.name, data.profile)
                     Core:RefreshCVars()
                 end,
             },
@@ -269,7 +268,7 @@ local columnInfo = {
                 text = L['Load Default'],
                 onClick = function(button)
                     local data = button:GetParent().data
-                    C_CVar_SetCVar(data.name, data.defaultValue)
+                    _G.C_CVar.SetCVar(data.name, data.defaultValue)
                     Core:RefreshCVars()
                 end,
             },
