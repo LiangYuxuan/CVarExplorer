@@ -150,6 +150,7 @@ local specialCVar = {
     ['lastTransmogOutfitIDSpec4'] = 'TrackAction',
     ['minimapShapeshiftTracking'] = 'TrackAction',
     ['minimapTrackedInfov3'] = 'TrackAction',
+    ['minimapTrackedInfov4'] = 'TrackAction',
     ['notifiedOfNewMail'] = 'TrackAction',
     ['numCurrencyCategories'] = 'TrackAction',
     ['numReputationHeaders'] = 'TrackAction',
