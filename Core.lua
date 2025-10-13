@@ -84,6 +84,7 @@ local specialCVar = {
     ['closedExtraAbiltyTutorials'] = 'GameTip',
     ['closedInfoFrames'] = 'GameTip',
     ['closedInfoFramesAccountWide'] = 'GameTip',
+    ['closedRemixArtifactTutorialFrames'] = 'GameTip',
     ['covenantMissionTutorial'] = 'GameTip',
     ['dangerousShipyardMissionWarningAlreadyShown'] = 'GameTip',
     ['flaggedTutorials'] = 'GameTip',
