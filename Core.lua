@@ -80,7 +80,9 @@ local specialCVar = {
     ['perksActivitiesPendingCompletion'] = 'GameProgress',
 
     -- Game Tip: CVars that used to show game tips
+    ['accountNeedsTurnStrafeDialog'] = 'GameTip',
     ['addFriendInfoShown'] = 'GameTip',
+    ['characterNeedsTurnStrafeDialog'] = 'GameTip',
     ['closedExtraAbiltyTutorials'] = 'GameTip',
     ['closedInfoFrames'] = 'GameTip',
     ['closedInfoFramesAccountWide'] = 'GameTip',
@@ -97,7 +99,6 @@ local specialCVar = {
     ['professionToolSlotsExampleShown'] = 'GameTip',
     ['seenAlliedRaceUnlocks'] = 'GameTip',
     ['seenAsiaCharacterUpgradePopup'] = 'GameTip',
-    ['seenCharacterSelectAddGroupHelpTip'] = 'GameTip',
     ['seenCharacterSelectNavBarCampsHelpTip'] = 'GameTip',
     ['seenCharacterSelectWarbandHelpTip'] = 'GameTip',
     ['seenCharacterUpgradePopup'] = 'GameTip',
@@ -131,7 +132,6 @@ local specialCVar = {
     ['splashScreenSeason'] = 'TimeEvent',
 
     -- Track Action: CVars that used to track user actions
-    ['advJournalLastOpened'] = 'TrackAction',
     ['auctionHouseDurationDropdown'] = 'TrackAction',
     ['cameraSavedDistance'] = 'TrackAction',
     ['cameraSavedPitch'] = 'TrackAction',
