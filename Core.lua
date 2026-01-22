@@ -75,6 +75,7 @@ local specialCVar = {
     ['lastRenownForMajorFaction2685'] = 'GameProgress',
     ['lastRenownForMajorFaction2688'] = 'GameProgress',
     ['lastRenownForMajorFaction2736'] = 'GameProgress',
+    ['majorFactionRenownMap'] = 'GameProgress',
     ['perksActivitiesCurrentMonth'] = 'GameProgress',
     ['perksActivitiesLastPoints'] = 'GameProgress',
     ['perksActivitiesPendingCompletion'] = 'GameProgress',
@@ -99,8 +100,6 @@ local specialCVar = {
     ['professionToolSlotsExampleShown'] = 'GameTip',
     ['seenAlliedRaceUnlocks'] = 'GameTip',
     ['seenAsiaCharacterUpgradePopup'] = 'GameTip',
-    ['seenCharacterSelectNavBarCampsHelpTip'] = 'GameTip',
-    ['seenCharacterSelectWarbandHelpTip'] = 'GameTip',
     ['seenCharacterUpgradePopup'] = 'GameTip',
     ['seenConfigurationWarnings'] = 'GameTip',
     ['seenExpansionTrialPopup'] = 'GameTip',
@@ -114,7 +113,6 @@ local specialCVar = {
     ['showNPETutorials'] = 'GameTip',
     ['showPhotosensitivityWarning'] = 'GameTip',
     ['showTokenFrame'] = 'GameTip',
-    ['showTokenFrameHonor'] = 'GameTip',
     ['showTutorials'] = 'GameTip',
     ['soulbindsActivatedTutorial'] = 'GameTip',
     ['soulbindsLandingPageTutorial'] = 'GameTip',
@@ -128,8 +126,6 @@ local specialCVar = {
     ['newDelvesSeason'] = 'TimeEvent',
     ['newMythicPlusSeason'] = 'TimeEvent',
     ['newPvpSeason'] = 'TimeEvent',
-    ['splashScreenNormal'] = 'TimeEvent',
-    ['splashScreenSeason'] = 'TimeEvent',
 
     -- Track Action: CVars that used to track user actions
     ['auctionHouseDurationDropdown'] = 'TrackAction',
@@ -144,14 +140,17 @@ local specialCVar = {
     ['eventSchedulerLastUpdate'] = 'TrackAction',
     ['garrisonCompleteTalent'] = 'TrackAction',
     ['garrisonCompleteTalentType'] = 'TrackAction',
+    ['housingDecorFreePlaceEnabled'] = 'TrackAction',
     ['lastCharacterIndex'] = 'TrackAction',
     ['lastLockedDelvesCompanionAbilities'] = 'TrackAction',
     ['lastSelectedClubId'] = 'TrackAction',
     ['lastSelectedDelvesTier'] = 'TrackAction',
-    ['lastTransmogOutfitIDSpec1'] = 'TrackAction',
-    ['lastTransmogOutfitIDSpec2'] = 'TrackAction',
-    ['lastTransmogOutfitIDSpec3'] = 'TrackAction',
-    ['lastTransmogOutfitIDSpec4'] = 'TrackAction',
+    ['lastTransmogCustomSetIDNoSpec'] = 'TrackAction',
+    ['lastTransmogCustomSetIDSpec1'] = 'TrackAction',
+    ['lastTransmogCustomSetIDSpec2'] = 'TrackAction',
+    ['lastTransmogCustomSetIDSpec3'] = 'TrackAction',
+    ['lastTransmogCustomSetIDSpec4'] = 'TrackAction',
+    ['lastTransmogOutfitIDNoSpec'] = 'TrackAction',
     ['minimapShapeshiftTracking'] = 'TrackAction',
     ['minimapTrackedInfov4'] = 'TrackAction',
     ['notifiedOfNewMail'] = 'TrackAction',
@@ -202,9 +201,6 @@ local specialCVar = {
     ['engineSurveyPatch'] = 'Internal',
     ['telemetryWowlabsPackage'] = 'Internal',
     ['telemetryWowPackage'] = 'Internal',
-
-    -- User: Manual ignore
-    ['spellActivationOverlayOpacity'] = 'Manual',
 }
 
 ---@class CECVarWindowData
