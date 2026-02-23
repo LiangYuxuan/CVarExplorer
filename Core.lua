@@ -143,6 +143,7 @@ local specialCVar = {
     ['housingDecorFreePlaceEnabled'] = 'TrackAction',
     ['lastCharacterIndex'] = 'TrackAction',
     ['lastLockedDelvesCompanionAbilities'] = 'TrackAction',
+    ['lastLockedTieredEntranceCompanionAbilities'] = 'TrackAction',
     ['lastSelectedClubId'] = 'TrackAction',
     ['lastSelectedDelvesTier'] = 'TrackAction',
     ['lastTransmogCustomSetIDNoSpec'] = 'TrackAction',
