@@ -106,7 +106,7 @@ local specialCVar = {
     ['talentPointsSpent'] = 'GameTip',
 
     -- Time Event: CVars that used to track notified time events
-    ['highestUnlockedDelvesTier'] = 'TimeEvent',
+    ['highestUnlockedTieredEntranceTier'] = 'TimeEvent',
     ['lastAddonVersion'] = 'TimeEvent',
     ['latestSplashScreen'] = 'TimeEvent',
     ['newDelvesSeason'] = 'TimeEvent',
@@ -131,7 +131,7 @@ local specialCVar = {
     ['lastLockedDelvesCompanionAbilities'] = 'TrackAction',
     ['lastLockedTieredEntranceCompanionAbilities'] = 'TrackAction',
     ['lastSelectedClubId'] = 'TrackAction',
-    ['lastSelectedDelvesTier'] = 'TrackAction',
+    ['lastSelectedTieredEntranceTier'] = 'TrackAction',
     ['lastTransmogCustomSetIDNoSpec'] = 'TrackAction',
     ['lastTransmogCustomSetIDSpec1'] = 'TrackAction',
     ['lastTransmogCustomSetIDSpec2'] = 'TrackAction',
