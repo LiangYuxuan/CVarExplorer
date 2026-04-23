@@ -54,7 +54,7 @@ local specialCVar = {
     ['LibOpenRaidTempCacheDebug'] = 'ThirdParty',
 
     -- Game Progress: CVars that used to track game progress
-    ['endeavorInitiativesLastPoints'] = 'GameProgress',
+    ['endeavorInitiativesLastPointsMap'] = 'GameProgress',
     ['lastRenownForCovenant1'] = 'GameProgress',
     ['lastRenownForCovenant2'] = 'GameProgress',
     ['lastRenownForCovenant3'] = 'GameProgress',
@@ -167,7 +167,6 @@ local specialCVar = {
     ['trackedProfessionRecraftRecipes'] = 'TrackActionBitwise',
     ['trackedQuests'] = 'TrackActionBitwise',
     ['trackedWorldQuests'] = 'TrackActionBitwise',
-    ['unlockedExpansionLandingPages'] = 'TrackActionBitwise',
     ['unlockedMajorFactions'] = 'TrackActionBitwise',
     ['wardrobeSetsFilters'] = 'TrackActionBitwise',
     ['wardrobeShowCollected'] = 'TrackActionBitwise',
