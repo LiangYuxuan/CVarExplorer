@@ -128,7 +128,6 @@ local specialCVar = {
     ['garrisonCompleteTalentType'] = 'TrackAction',
     ['housingDecorFreePlaceEnabled'] = 'TrackAction',
     ['lastCharacterIndex'] = 'TrackAction',
-    ['lastLockedDelvesCompanionAbilities'] = 'TrackAction',
     ['lastLockedTieredEntranceCompanionAbilities'] = 'TrackAction',
     ['lastSelectedClubId'] = 'TrackAction',
     ['lastSelectedTieredEntranceTier'] = 'TrackAction',
